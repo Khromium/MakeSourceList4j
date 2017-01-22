@@ -12,11 +12,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("layout/main.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/main.fxml"));
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("ソースリスト作るよ");
         primaryStage.setScene(new Scene(root, 600, 400));
-        primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("icons.png")));
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/icons.png")));
         primaryStage.setMinHeight(400);
         primaryStage.setMinWidth(600);
         Controller controller = fxmlLoader.getController();
