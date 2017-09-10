@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="mainpage" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="700.0" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #ECEFF1;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="NitTokyo.Controller">
+<VBox fx:id="mainpage" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="700.0" onDragDropped="#handleDropped" onDragOver="#handleDragOver" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #ECEFF1;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="NitTokyo.Controller">
     <children>
               <ToolBar maxHeight="56.0" maxWidth="1.7976931348623157E308" minHeight="56.0" prefHeight="56.0" style="-fx-background-color: #2196F3;">
                   <Pane prefHeight="56.0" prefWidth="245.0">

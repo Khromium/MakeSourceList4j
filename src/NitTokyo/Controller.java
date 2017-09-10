@@ -4,6 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -46,7 +49,38 @@ public class Controller implements Initializable {
     private TextField midasi2;
     @FXML
     private TextField midasi3;
+    @FXML
+    private void handleDragOver(DragEvent event) {
+        // ドラッグボードを取得
+        Dragboard board = event.getDragboard();
+        if(board.hasFiles()) {  // ドラッグされているのがファイルなら
+            // コピーモードを設定(これでマウスカーソルが矢印に+のやつになる)
+            event.acceptTransferModes(TransferMode.COPY);
+        }
+    }
 
+    @FXML
+    private void handleDropped(DragEvent event) {
+        // ドラッグボードを取得
+        Dragboard board = event.getDragboard();
+        if(board.hasFiles()) {
+            board.getFiles().stream().forEach((f) -> {
+                if(f.isDirectory()){
+                    List<String> filePathList = new ArrayList<>();
+                    getFileRecursion(filePathList, f.getAbsolutePath()).stream().filter(s -> isTextFile(s)).collect(Collectors.toList()).forEach(s -> fileList.getItems().add(new Label(s)));
+                }else {
+                    if (isTextFile(f.getAbsolutePath()))
+                        fileList.getItems().add(new Label(f.getAbsolutePath()));
+                }
+            });
+            // ドロップ受け入れ
+            event.setDropCompleted(true);
+        } else {	// ファイル以外なら
+            // ドロップ受け入れ拒否
+            event.setDropCompleted(false);
+        }
+    }
+    
     public static String SOUTAI_FILE = "abs";
     private Stage stage;
 
