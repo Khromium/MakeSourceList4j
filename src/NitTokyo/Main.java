@@ -15,10 +15,10 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/main.fxml"));
         Parent root = fxmlLoader.load();
         primaryStage.setTitle("ソースリスト作るよ");
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setScene(new Scene(root, 700, 500));
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/icons.png")));
-        primaryStage.setMinHeight(400);
-        primaryStage.setMinWidth(600);
+        primaryStage.setMinHeight(500);
+        primaryStage.setMinWidth(700);
         Controller controller = fxmlLoader.getController();
         controller.init(primaryStage);
 //        primaryStage.setMaxHeight(400);

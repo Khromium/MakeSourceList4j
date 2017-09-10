@@ -3,9 +3,7 @@ package NitTokyo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -30,15 +28,40 @@ public class Controller implements Initializable {
     private Label currentDir;
     @FXML
     private Label geneLog;
+    @FXML
+    private TextField midasiOneFont;
+    @FXML
+    private TextField midasiTwoFont;
+    @FXML
+    private TextField codeFont;
+    @FXML
+    private ChoiceBox midasiOneFontSize;
+    @FXML
+    private ChoiceBox midasiTwoFontSize;
+    @FXML
+    private ChoiceBox codeFontSize;
+    @FXML
+    private TextField midasi1;
+    @FXML
+    private TextField midasi2;
+    @FXML
+    private TextField midasi3;
 
     public static String SOUTAI_FILE = "abs";
-    public static String STYLE_HEADING1 = "head1";
-    public static String STYLE_HEADING2 = "head2";
-    public static String STYLE_HEADING3 = "head3";
     private Stage stage;
 
     public void init(Stage stage) {
         this.stage = stage;
+        List<Integer> fontSize = new ArrayList<>();
+//        fontSize.add(10.5);
+        for (int i = 1; i <= 30; i++) fontSize.add(i);
+
+        midasiOneFontSize.getItems().addAll(fontSize);
+        midasiTwoFontSize.getItems().addAll(fontSize);
+        codeFontSize.getItems().addAll(fontSize);
+        midasiOneFontSize.getSelectionModel().select(15);
+        midasiTwoFontSize.getSelectionModel().select(13);
+        codeFontSize.getSelectionModel().select(11);
 
     }
 
@@ -162,9 +185,9 @@ public class Controller implements Initializable {
         try {
             document = new XWPFDocument();
             styles = document.createStyles();
-            addCustomHeadingStyle(document, styles, STYLE_HEADING1, 1, 24, "000000");
-            addCustomHeadingStyle(document, styles, STYLE_HEADING2, 2, 20, "000000");
-            addCustomHeadingStyle(document, styles, STYLE_HEADING3, 3, 12, "000000");
+            addCustomHeadingStyle(document, styles, midasi1.getText(), 1, (Integer) midasiOneFontSize.getSelectionModel().getSelectedItem() * 2, "000000");
+            addCustomHeadingStyle(document, styles, midasi2.getText(), 2, (Integer) midasiTwoFontSize.getSelectionModel().getSelectedItem() * 2, "000000");
+            addCustomHeadingStyle(document, styles, midasi3.getText(), 3, (Integer) codeFontSize.getSelectionModel().getSelectedItem() * 2, "000000");
 
             int headCount1 = 1;
             int headCount2 = 1;
@@ -173,9 +196,9 @@ public class Controller implements Initializable {
 
                 if (!prebFolder.equals(getRelativeFilePath(path))) {//前と相対パスが異なったら
                     paragraph = document.createParagraph();//タイトルづくり
-                    paragraph.setStyle(STYLE_HEADING1);
+                    paragraph.setStyle(midasi1.getText());
                     run = paragraph.createRun();
-                    run.setFontFamily("MS ゴシック");
+                    run.setFontFamily(midasiOneFont.getText());
                     prebFolder = getRelativeFilePath(path);
                     String datapath = getRelativeFilePath(path);
                     while (datapath.indexOf("\\") != -1) datapath = datapath.replace("\\", "/");//tksmモード
@@ -186,9 +209,9 @@ public class Controller implements Initializable {
                 if (!new File(path).exists()) continue;//error handling
 
                 paragraph = document.createParagraph();//ファイル名
-                paragraph.setStyle(STYLE_HEADING2);
+                paragraph.setStyle(midasi2.getText());
                 run = paragraph.createRun();
-                run.setFontFamily("MS ゴシック");
+                run.setFontFamily(midasiTwoFont.getText());
                 prebFolder = getRelativeFilePath(path);
                 run.setText(headCount1 - 1 + "." + headCount2 + " " + new File(path).getName());
 
@@ -200,8 +223,8 @@ public class Controller implements Initializable {
 //                paragraph.setStyle(STYLE_HEADING3);
                 run = paragraph.createRun();
                 for (String ss : readTXTFile(path).split("\n")) {
-                    run.setFontSize(10);
-                    run.setFontFamily("MS 明朝");
+                    run.setFontSize((Integer) codeFontSize.getSelectionModel().getSelectedItem());
+                    run.setFontFamily(codeFont.getText());
                     run.setText(ss);
                     run.addBreak();
                 }
@@ -217,11 +240,11 @@ public class Controller implements Initializable {
 
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("保存ファイル選択");
-            fileChooser.setInitialFileName( "output.docx");
+            fileChooser.setInitialFileName("output.docx");
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("word file", "*.docx"));
             fileChooser.setInitialDirectory(new File("./"));
             File saveFile = fileChooser.showSaveDialog(stage);
-            if(saveFile==null) {
+            if (saveFile == null) {
                 geneLog.setText("保存ファイルが選択されていません");
                 return;
             }

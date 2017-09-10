@@ -1,95 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
-
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.ToolBar?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
-<VBox fx:id="mainpage" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0"
-      minWidth="700.0" prefHeight="461.0" prefWidth="600.0" style="-fx-background-color: #ECEFF1;"
-      xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="NitTokyo.Controller">
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="mainpage" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="500.0" minWidth="700.0" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: #ECEFF1;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="NitTokyo.Controller">
     <children>
-        <ToolBar maxHeight="56.0" maxWidth="1.7976931348623157E308" minHeight="56.0" prefHeight="56.0"
-                 style="-fx-background-color: #2196F3;">
-            <Pane prefHeight="56.0" prefWidth="245.0">
-                <children>
-                    <Label layoutX="34.0" layoutY="17.0" lineSpacing="8.0" text="ソースリスト作るよ" textFill="WHITE">
-                        <font>
-                            <Font name="System Bold" size="16.0"/>
-                        </font>
-                    </Label>
-                </children>
-            </Pane>
-        </ToolBar>
-        <VBox layoutX="51.0" layoutY="63.0" prefHeight="156.0" prefWidth="652.0">
-
-            <children>
-
-                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-                    <Button fx:id="picker" minWidth="90.0" onAction="#buttonsHandler"
-                            style="-fx-background-color: #9C27B0;" text="ファイル選択…" textFill="WHITE"/>
-
-                    <Button fx:id="folderPicker" minWidth="90.0" onAction="#buttonsHandler"
-                            style="-fx-background-color: #3F51B5;" text="ファイル再帰選択…" textFill="WHITE">
-
-                        <HBox.margin>
-                            <Insets left="10.0"/>
-                        </HBox.margin>
-                    </Button>
-
-                    <Label fx:id="currentDir" text="ぱすだお">
-                        <VBox.margin>
-                            <Insets top="20.0"/>
-                        </VBox.margin>
-                        <HBox.margin>
-                            <Insets left="10.0"/>
-                        </HBox.margin>
-                    </Label>
-                </HBox>
-                <HBox alignment="BOTTOM_LEFT" prefHeight="200.0" prefWidth="200.0">
-                    <Label text="選択済みファイル">
-                        <VBox.margin>
-                            <Insets top="20.0"/>
-                        </VBox.margin>
-                        <opaqueInsets>
-                            <Insets/>
-                        </opaqueInsets>
-                    </Label>
-                    <VBox.margin>
-                        <Insets top="20.0"/>
-                    </VBox.margin>
-
-                </HBox>
-
-                <ListView fx:id="fileList" minHeight="150.0" prefHeight="176.0" prefWidth="668.0"
-                          style="-fx-background-color: #DDDDDD;"/>
-
-                <VBox alignment="BOTTOM_RIGHT" prefHeight="200.0" prefWidth="200.0">
-                    <Button fx:id="clear" layoutX="616.0" style="-fx-background-color: #FCFCFC;" layoutY="107.0"
-                            onAction="#buttonsHandler" text="クリア"
-                            textAlignment="RIGHT"/>
-                </VBox>
-
-                <HBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="200.0">
-                    <Button fx:id="generate" minWidth="100.0" onAction="#buttonsHandler"
-                            style="-fx-background-color: #F44336;" text="作成スタート！！" textFill="WHITE"/>
+              <ToolBar maxHeight="56.0" maxWidth="1.7976931348623157E308" minHeight="56.0" prefHeight="56.0" style="-fx-background-color: #2196F3;">
+                  <Pane prefHeight="56.0" prefWidth="245.0">
+                      <children>
+                          <Label layoutX="34.0" layoutY="17.0" lineSpacing="8.0" text="ソースリスト作るよ" textFill="WHITE">
+                              <font>
+                                  <Font name="System Bold" size="16.0" />
+                              </font>
+                          </Label>
+                      </children>
+                  </Pane>
+              </ToolBar>
+        <TabPane minHeight="500.0" minWidth="700.0" prefHeight="200.0" prefWidth="200.0" side="LEFT" style="-fx-background-color: #ECEFF1;" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab style="-fx-background-color: #FAFAFA;" text="Creation">
+                    <content>
+                        <VBox minHeight="400.0" minWidth="650.0" prefHeight="400.0" prefWidth="650.0" style="-fx-background-color: #FAFAFA;">
+                            <children>
+                                <VBox prefHeight="156.0" prefWidth="652.0">
 
 
-                </HBox>
-            </children>
-            <opaqueInsets>
-                <Insets bottom="30.0" left="30.0" right="30.0" top="30.0"/>
-            </opaqueInsets>
-            <VBox.margin>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
-            </VBox.margin>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+                                        <Button fx:id="picker" minWidth="90.0" onAction="#buttonsHandler" style="-fx-background-color: #9C27B0;" text="ファイル選択…" textFill="WHITE" />
 
-            <Label text="作成ボタンを押してください..." fx:id="geneLog"/>
-        </VBox>
+                                        <Button fx:id="folderPicker" minWidth="90.0" onAction="#buttonsHandler" style="-fx-background-color: #3F51B5;" text="ファイル再帰選択…" textFill="WHITE">
+
+                                            <HBox.margin>
+                                                <Insets left="10.0" />
+                                            </HBox.margin>
+                                        </Button>
+
+                                        <Label fx:id="currentDir" text="ぱすだお">
+                                            <VBox.margin>
+                                                <Insets top="20.0" />
+                                            </VBox.margin>
+                                            <HBox.margin>
+                                                <Insets left="10.0" />
+                                            </HBox.margin>
+                                        </Label>
+                                    </HBox>
+                                    <HBox alignment="BOTTOM_LEFT" prefHeight="200.0" prefWidth="200.0">
+                                        <Label text="選択済みファイル">
+                                            <VBox.margin>
+                                                <Insets top="20.0" />
+                                            </VBox.margin>
+                                            <opaqueInsets>
+                                                <Insets />
+                                            </opaqueInsets>
+                                        </Label>
+                                        <VBox.margin>
+                                            <Insets top="20.0" />
+                                        </VBox.margin>
+
+                                    </HBox>
+
+                                    <ListView fx:id="fileList" minHeight="150.0" prefHeight="150.0" prefWidth="604.0" style="-fx-background-color: #DDDDDD;" />
+
+                                    <VBox alignment="BOTTOM_RIGHT" prefHeight="200.0" prefWidth="200.0">
+                                        <Button fx:id="clear" layoutX="616.0" layoutY="107.0" onAction="#buttonsHandler" style="-fx-background-color: #FCFCFC;" text="クリア" textAlignment="RIGHT" />
+                                    </VBox>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="200.0">
+                                        <Button fx:id="generate" minWidth="100.0" onAction="#buttonsHandler" style="-fx-background-color: #F44336;" text="作成スタート！！" textFill="WHITE" />
+                                    </HBox>
+
+                                    <Label fx:id="geneLog" text="作成ボタンを押してください..." />
+                                    <opaqueInsets>
+                                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                                    </opaqueInsets>
+                                    <VBox.margin>
+                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                    </VBox.margin>
+                                </VBox>
+                            </children>
+                        </VBox>
+                    </content>
+                </Tab>
+                <Tab style="-fx-background-color: #FAFAFA;" text="Customize">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #FAFAFA;">
+                     <children>
+                        <VBox prefHeight="0.0" prefWidth="657.0">
+                           <children>
+                              <Label text="見出し1の書式" />
+            
+                                                <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="667.0">
+                                           <children>
+                                               <VBox layoutX="10.0" layoutY="10.0" prefHeight="54.0" prefWidth="114.0">
+                                                   <children>
+                                                       <Label text="Font" />
+                                                       <TextField fx:id="midasiOneFont" prefHeight="27.0" prefWidth="106.0" style="-fx-background-color: #FFCCBC;" text="MS ゴシック" />
+                                                   </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                               </VBox>
+                                               <VBox prefHeight="200.0" prefWidth="100.0">
+                                                   <children>
+                                                       <Label text="Font Size" />
+                                                       <ChoiceBox fx:id="midasiOneFontSize" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #FFCCBC;" />
+                                                   </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                               </VBox>
+                                    <VBox layoutX="124.0" layoutY="10.0" prefHeight="54.0" prefWidth="94.0">
+                                       <children>
+                                          <Label text="見出し名" />
+                                          <TextField fx:id="midasi1" prefHeight="27.0" prefWidth="64.0" style="-fx-background-color: #FFCCBC;" text="見出し1" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                           </children>
+                                       </HBox>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="15.0" layoutY="15.0" prefHeight="0.0" prefWidth="657.0">
+                           <children>
+                              <Label text="見出し2の書式">
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </Label>
+                              <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="667.0">
+                                 <children>
+                                    <VBox layoutX="10.0" layoutY="10.0" prefHeight="54.0" prefWidth="114.0">
+                                       <children>
+                                          <Label text="Font" />
+                                          <TextField fx:id="midasiTwoFont" prefHeight="27.0" prefWidth="106.0" style="-fx-background-color: #C8E6C9;" text="MS ゴシック" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label text="Font Size" />
+                                          <ChoiceBox fx:id="midasiTwoFontSize" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #C8E6C9;" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox prefHeight="54.0" prefWidth="94.0">
+                                       <children>
+                                          <Label text="見出し名" />
+                                          <TextField fx:id="midasi2" prefHeight="27.0" prefWidth="64.0" style="-fx-background-color: #C8E6C9;" text="見出し2" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox layoutX="15.0" layoutY="86.0" prefHeight="0.0" prefWidth="657.0">
+                           <children>
+                              <Label text="コード部分の書式">
+                                 <padding>
+                                    <Insets top="5.0" />
+                                 </padding>
+                              </Label>
+                              <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="667.0">
+                                 <children>
+                                    <VBox layoutX="10.0" layoutY="10.0" prefHeight="54.0" prefWidth="114.0">
+                                       <children>
+                                          <Label text="Font" />
+                                          <TextField fx:id="codeFont" prefHeight="27.0" prefWidth="106.0" style="-fx-background-color: #B3E5FC;" text="MS 明朝" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label text="Font Size" />
+                                          <ChoiceBox fx:id="codeFontSize" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: #B3E5FC;" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox prefHeight="54.0" prefWidth="94.0">
+                                       <children>
+                                          <Label text="見出し名" />
+                                          <TextField fx:id="midasi3" prefHeight="27.0" prefWidth="64.0" style="-fx-background-color: #B3E5FC;" text="標準" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </VBox>
+               </content>
+                </Tab>
+            </tabs>
+        </TabPane>
     </children>
 </VBox>
