@@ -84,6 +84,7 @@ public class Controller implements Initializable {
 
     public static String SOUTAI_FILE = "abs";
     private Stage stage;
+    private XWPFDocument initDocument = null;
 
     public void init(Stage stage) {
         this.stage = stage;
@@ -136,6 +137,20 @@ public class Controller implements Initializable {
                 File selectedFolder = directoryChooser.showDialog(mainpage.getScene().getWindow());
                 List<String> filePathList = new ArrayList<>();
                 getFileRecursion(filePathList, selectedFolder.getAbsolutePath()).stream().filter(s -> isTextFile(s)).collect(Collectors.toList()).forEach(s -> fileList.getItems().add(new Label(s)));
+                break;
+            case "wordPicker":
+                FileChooser fileChooser2 = new FileChooser();
+                fileChooser2.setTitle("Open Resource File");
+                File userDirectory2 = new File("." + File.separator + SOUTAI_FILE);
+                fileChooser2.setInitialDirectory(userDirectory2);
+
+                fileChooser2.getExtensionFilters().add(
+                        new FileChooser.ExtensionFilter("All Files", "*.docx"));
+                File selectedFile2 = fileChooser2.showOpenDialog(mainpage.getScene().getWindow());
+                if (selectedFile2 != null) {
+                    initDocument = getLastParagraph(selectedFile2);
+                    geneLog.setText("wordファイルを選択しました");
+                }
                 break;
         }
 
@@ -190,6 +205,22 @@ public class Controller implements Initializable {
         return filePathList;
     }
 
+//    public void readWordFile(File wordFile) {
+//        try (FileInputStream fin = new FileInputStream(wordFile)) {
+//            HWPFDocument document = new HWPFDocument(fin);
+//            Range range = document.getRange();
+//            ArrayList<PAPX> paragraphs = document.getParagraphTable().getParagraphs();
+//            paragraphs.get(paragraphs.size());
+//            document.get
+//
+//
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         String path = new File(".").getAbsoluteFile().getParent();
@@ -199,6 +230,31 @@ public class Controller implements Initializable {
     }
 
 
+    /**
+     * ドキュメントの一番後ろに追加します
+     *
+     * @param wordData
+     * @return
+     */
+    public XWPFDocument getLastParagraph(File wordData) {
+        try (FileInputStream fin = new FileInputStream(wordData)) {
+            XWPFDocument document = new XWPFDocument(fin);
+            document.insertNewParagraph(document.getLastParagraph().getCTP().newCursor());
+            return document;
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * ドキュメントを作成します。
+     *
+     * @param filePath
+     */
     public void createDocument(List<String> filePath) {
         List<List<String>> extArray = new ArrayList<>();//拡張子含めたリスト
         HashSet<String> extension = new HashSet<>();//拡張子判別
@@ -219,7 +275,12 @@ public class Controller implements Initializable {
         String prebFolder = " ";
 
         try {
-            document = new XWPFDocument();
+            if (initDocument == null) {
+                document = new XWPFDocument();
+            } else {
+                document = initDocument;
+                document.createParagraph().createRun().addBreak(BreakType.PAGE);
+            }
             styles = document.createStyles();
             addCustomHeadingStyle(document, styles, midasi1.getText(), 1, (Integer) midasiOneFontSize.getSelectionModel().getSelectedItem() * 2, "000000");
             addCustomHeadingStyle(document, styles, midasi2.getText(), 2, (Integer) midasiTwoFontSize.getSelectionModel().getSelectedItem() * 2, "000000");

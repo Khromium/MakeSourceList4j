@@ -55,6 +55,16 @@
                                             </HBox.margin>
                                         </Label>
                                     </HBox>
+
+                                    <Button fx:id="wordPicker" minWidth="90.0" onAction="#buttonsHandler" style="-fx-background-color: #009688;" text="ベースファイル選択…" textFill="WHITE">
+                                        <VBox.margin>
+                                            <Insets top="5.0" />
+                                        </VBox.margin>
+                                        <HBox.margin>
+                                            <Insets left="10.0" />
+                                        </HBox.margin>
+                                    </Button>
+
                                     <HBox alignment="BOTTOM_LEFT" prefHeight="200.0" prefWidth="200.0">
                                         <Label text="選択済みファイル">
                                             <VBox.margin>
@@ -202,7 +212,7 @@
                                     <VBox prefHeight="54.0" prefWidth="94.0">
                                        <children>
                                           <Label text="見出し名" />
-                                          <TextField fx:id="midasi3" prefHeight="27.0" prefWidth="64.0" style="-fx-background-color: #B3E5FC;" text="標準" />
+                                          <TextField fx:id="midasi3" prefHeight="27.0" prefWidth="64.0" style="-fx-background-color: #B3E5FC;" text="コード標準" />
                                        </children>
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
