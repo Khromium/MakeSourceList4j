@@ -132,7 +132,7 @@
                                     <VBox layoutX="124.0" layoutY="10.0" prefHeight="54.0" prefWidth="94.0">
                                        <children>
                                           <Label text="見出し名" />
-                                          <TextField fx:id="midasi1" prefHeight="27.0" prefWidth="64.0" style="-fx-background-color: #FFCCBC;" text="見出し1" />
+                                          <TextField fx:id="midasi1" prefHeight="27.0" prefWidth="64.0" style="-fx-background-color: #FFCCBC;" text="Heading 1" />
                                        </children>
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -172,7 +172,7 @@
                                     <VBox prefHeight="54.0" prefWidth="94.0">
                                        <children>
                                           <Label text="見出し名" />
-                                          <TextField fx:id="midasi2" prefHeight="27.0" prefWidth="64.0" style="-fx-background-color: #C8E6C9;" text="見出し2" />
+                                          <TextField fx:id="midasi2" prefHeight="27.0" prefWidth="64.0" style="-fx-background-color: #C8E6C9;" text="Heading 2" />
                                        </children>
                                        <padding>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

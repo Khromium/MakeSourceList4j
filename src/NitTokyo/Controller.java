@@ -281,6 +281,8 @@ public class Controller implements Initializable {
                 document = initDocument;
                 document.createParagraph().createRun().addBreak(BreakType.PAGE);
             }
+//            document.createTOC(); //Index
+
             styles = document.createStyles();
             addCustomHeadingStyle(document, styles, midasi1.getText(), 1, (Integer) midasiOneFontSize.getSelectionModel().getSelectedItem() * 2, "000000");
             addCustomHeadingStyle(document, styles, midasi2.getText(), 2, (Integer) midasiTwoFontSize.getSelectionModel().getSelectedItem() * 2, "000000");
@@ -346,6 +348,8 @@ public class Controller implements Initializable {
                 return;
             }
             outputStream = new FileOutputStream(saveFile);
+//            document.enforceUpdateFields();
+
             document.write(outputStream);
 
             geneLog.setText("作成完了！");
