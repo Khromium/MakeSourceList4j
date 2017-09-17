@@ -49,6 +49,8 @@ public class Controller implements Initializable {
     private TextField midasi2;
     @FXML
     private TextField midasi3;
+    @FXML
+    private CheckBox dotGit;
 
     @FXML
     private void handleDragOver(DragEvent event) {
@@ -292,6 +294,8 @@ public class Controller implements Initializable {
             int headCount2 = 1;
             //ここからドキュメント作成
             for (String path : filePath) {
+                if (dotGit.isSelected() == true && Arrays.stream(path.split(File.separator)).filter(s -> s.equals(".git")).findAny().isPresent())
+                    continue; //.git無視
 
                 if (!prebFolder.equals(getRelativeFilePath(path))) {//前と相対パスが異なったら
                     paragraph = document.createParagraph();//タイトルづくり

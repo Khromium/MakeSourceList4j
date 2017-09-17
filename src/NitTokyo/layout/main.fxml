@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -222,6 +223,11 @@
                               </HBox>
                            </children>
                         </VBox>
+                        <CheckBox fx:id="dotGit" mnemonicParsing="false" text="作成時に.git以下は無視する" selected="true">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </CheckBox>
                      </children>
                      <opaqueInsets>
                         <Insets />
