@@ -49,11 +49,12 @@ public class Controller implements Initializable {
     private TextField midasi2;
     @FXML
     private TextField midasi3;
+
     @FXML
     private void handleDragOver(DragEvent event) {
         // ドラッグボードを取得
         Dragboard board = event.getDragboard();
-        if(board.hasFiles()) {  // ドラッグされているのがファイルなら
+        if (board.hasFiles()) {  // ドラッグされているのがファイルなら
             // コピーモードを設定(これでマウスカーソルが矢印に+のやつになる)
             event.acceptTransferModes(TransferMode.COPY);
         }
@@ -63,24 +64,24 @@ public class Controller implements Initializable {
     private void handleDropped(DragEvent event) {
         // ドラッグボードを取得
         Dragboard board = event.getDragboard();
-        if(board.hasFiles()) {
+        if (board.hasFiles()) {
             board.getFiles().stream().forEach((f) -> {
-                if(f.isDirectory()){
+                if (f.isDirectory()) {
                     List<String> filePathList = new ArrayList<>();
                     getFileRecursion(filePathList, f.getAbsolutePath()).stream().filter(s -> isTextFile(s)).collect(Collectors.toList()).forEach(s -> fileList.getItems().add(new Label(s)));
-                }else {
+                } else {
                     if (isTextFile(f.getAbsolutePath()))
                         fileList.getItems().add(new Label(f.getAbsolutePath()));
                 }
             });
             // ドロップ受け入れ
             event.setDropCompleted(true);
-        } else {	// ファイル以外なら
+        } else {    // ファイル以外なら
             // ドロップ受け入れ拒否
             event.setDropCompleted(false);
         }
     }
-    
+
     public static String SOUTAI_FILE = "abs";
     private Stage stage;
 
@@ -140,12 +141,15 @@ public class Controller implements Initializable {
 
     }
 
+    /**
+     * テキストファイル化の判別。
+     *
+     * @param filePath
+     * @return
+     */
     public static boolean isTextFile(String filePath) {
 
-        FileInputStream in = null;
-        try {
-            in = new FileInputStream(filePath);
-
+        try (FileInputStream in = new FileInputStream(filePath)) {
             byte[] b = new byte[1];
             while (in.read(b, 0, 1) > 0) {
                 if (b[0] == 0) {
@@ -156,18 +160,16 @@ public class Controller implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
             return false;
-        } finally {
-            if (in != null) {
-                try {
-                    in.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                in = null;
-            }
         }
     }
 
+    /**
+     * ファイルの再帰取得
+     *
+     * @param filePathList
+     * @param rootDir
+     * @return
+     */
     public List<String> getFileRecursion(List<String> filePathList, String rootDir) {
 
         File root = new File(rootDir);
