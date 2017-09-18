@@ -21,8 +21,8 @@ public class Main extends Application {
         primaryStage.setMinWidth(700);
         Controller controller = fxmlLoader.getController();
         controller.init(primaryStage);
-//        primaryStage.setMaxHeight(400);
-//        primaryStage.setMaxWidth(600);
+        primaryStage.setMaxHeight(500);
+        primaryStage.setMaxWidth(700);
 
 
         primaryStage.show();
