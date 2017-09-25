@@ -19,6 +19,7 @@ import java.io.*;
 import java.math.BigInteger;
 import java.net.URL;
 import java.util.*;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 
@@ -294,7 +295,8 @@ public class Controller implements Initializable {
             int headCount2 = 1;
             //ここからドキュメント作成
             for (String path : filePath) {
-                if (dotGit.isSelected() == true && Arrays.stream(path.split(File.separator)).filter(s -> s.equals(".git")).findAny().isPresent())
+                String pattern = Pattern.quote(System.getProperty("file.separator"));
+                if (dotGit.isSelected() == true && Arrays.stream(path.split(pattern)).filter(s -> s.equals(".git")).findAny().isPresent())
                     continue; //.git無視
 
                 if (!prebFolder.equals(getRelativeFilePath(path))) {//前と相対パスが異なったら
