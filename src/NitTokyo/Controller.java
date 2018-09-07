@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 import org.apache.poi.xwpf.usermodel.*;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.*;
 
-import javax.xml.bind.annotation.adapters.HexBinaryAdapter;
 import java.io.*;
 import java.math.BigInteger;
 import java.net.URL;
@@ -148,7 +147,7 @@ public class Controller implements Initializable {
                 fileChooser2.setInitialDirectory(userDirectory2);
 
                 fileChooser2.getExtensionFilters().add(
-                        new FileChooser.ExtensionFilter("All Files", "*.docx"));
+                        new FileChooser.ExtensionFilter("Word File", "*.docx"));
                 File selectedFile2 = fileChooser2.showOpenDialog(mainpage.getScene().getWindow());
                 if (selectedFile2 != null) {
                     initDocument = getLastParagraph(selectedFile2);
@@ -498,10 +497,26 @@ public class Controller implements Initializable {
     }
 
     public static byte[] hexToBytes(String hexString) {
-        HexBinaryAdapter adapter = new HexBinaryAdapter();
-        byte[] bytes = adapter.unmarshal(hexString);
-        return bytes;
+        char[] chars = hexString.toCharArray();
+        int len = chars.length;
+        if (len == 0) {
+            return null;
+        } else {
+            byte[] out = new byte[len >> 1];
+            int i = 0;
+            int j = 0;
+            while (j < len) {
+                int f = Character.digit(chars[j], 16) << 4;
+                j++;
+                f = f | Character.digit(chars[j], 16);
+                j++;
+                out[i] = (byte) (f & 255);
+                i++;
+            }
+            return out;
+        }
     }
+
 
     /**
      * 横サイズ調整

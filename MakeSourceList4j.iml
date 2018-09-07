@@ -11,5 +11,7 @@
     <orderEntry type="library" name="org.apache.poi:poi:3.16" level="project" />
     <orderEntry type="library" name="com.googlecode.juniversalchardet:juniversalchardet:1.0.3" level="project" />
     <orderEntry type="library" name="org.apache.poi:poi-ooxml:3.16" level="project" />
+    <orderEntry type="library" name="javax.xml.bind:jaxb-api:2.3.01" level="project" />
+    <orderEntry type="library" name="libs" level="project" />
   </component>
 </module>
